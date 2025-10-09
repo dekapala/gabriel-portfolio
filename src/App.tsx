@@ -1,14 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, Phone, Shield, Code, Lock, Server, Brain, Sparkles, ExternalLink, Download, MessageCircle, Send, X } from 'lucide-react';
 
+interface Message {
+  role: string;
+  content: string;
+}
+
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState('all');
   const [chatOpen, setChatOpen] = useState(false);
- const [messages, setMessages] = useState<Array<{role: string; content: string}>>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-const chatEndRef = useRef<HTMLDivElement>(null);
+  const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -22,7 +27,6 @@ const chatEndRef = useRef<HTMLDivElement>(null);
     }
   }, [messages]);
 
-  // Knowledge Base - Respuestas del chatbot
   const knowledgeBase = {
     experiencia: {
       keywords: ['experiencia', 'años', 'trabajo', 'carrera', 'trayectoria', 'experience', 'years', 'career'],
@@ -73,30 +77,27 @@ const chatEndRef = useRef<HTMLDivElement>(null);
   const findBestAnswer = (userInput: string) => {
     const input = userInput.toLowerCase().trim();
     
-    // Buscar coincidencias en la base de conocimientos
-   for (const [, data] of Object.entries(knowledgeBase)) {
+    for (const [, data] of Object.entries(knowledgeBase)) {
       const hasMatch = data.keywords.some(keyword => input.includes(keyword));
       if (hasMatch) {
         return data.answer;
       }
     }
     
-    // Respuesta por defecto
     return "Esa es una buena pregunta. Para información específica sobre ese tema, te recomiendo:\n\n• Revisar las secciones del portfolio arriba\n• Contactar directamente a Gabriel: gabrielleandro.p@outlook.com\n• Conectar en LinkedIn: linkedin.com/in/gabrielpalazzini\n\n¿Hay algo más sobre su experiencia, proyectos o disponibilidad que pueda ayudarte?";
   };
 
   const handleSendMessage = () => {
     if (!inputMessage.trim() || isTyping) return;
 
-    const userMessage = { role: 'user', content: inputMessage };
+    const userMessage: Message = { role: 'user', content: inputMessage };
     setMessages(prev => [...prev, userMessage]);
     setInputMessage('');
     setIsTyping(true);
 
-    // Simular typing delay
     setTimeout(() => {
       const answer = findBestAnswer(inputMessage);
-      const botMessage = { role: 'assistant', content: answer };
+      const botMessage: Message = { role: 'assistant', content: answer };
       setMessages(prev => [...prev, botMessage]);
       setIsTyping(false);
     }, 800);
@@ -173,7 +174,6 @@ const chatEndRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 text-gray-100">
-      {/* Navigation */}
       <nav className={`fixed w-full z-40 transition-all duration-300 ${scrolled ? 'bg-gray-900/95 backdrop-blur-lg shadow-lg shadow-cyan-500/10' : 'bg-transparent'}`}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -192,7 +192,6 @@ const chatEndRef = useRef<HTMLDivElement>(null);
         </div>
       </nav>
 
-      {/* Hero */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
         <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent"></div>
         <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"></div>
@@ -237,25 +236,24 @@ const chatEndRef = useRef<HTMLDivElement>(null);
             </a>
           </div>
 
-          {/* CV Download Buttons */}
-<div className="flex flex-wrap gap-3 justify-center mb-8">
-  <a 
-    href="/cv-gabriel-palazzini-es.pdf" 
-    download="CV-Gabriel-Palazzini-ES.pdf"
-    className="px-6 py-2.5 bg-gray-800 border border-cyan-500/30 rounded-lg hover:bg-cyan-500/10 transition inline-flex items-center gap-2 text-sm group"
-  >
-    <Download className="w-4 h-4 group-hover:scale-110 transition" />
-    <span>Descargar CV (Español)</span>
-  </a>
-  <a 
-    href="/resume-gabriel-palazzini-en.pdf" 
-    download="Resume-Gabriel-Palazzini-EN.pdf"
-    className="px-6 py-2.5 bg-gray-800 border border-blue-500/30 rounded-lg hover:bg-blue-500/10 transition inline-flex items-center gap-2 text-sm group"
-  >
-    <Download className="w-4 h-4 group-hover:scale-110 transition" />
-    <span>Download Resume (English)</span>
-  </a>
-</div>
+          <div className="flex flex-wrap gap-3 justify-center mb-8">
+            <a 
+              href="/cv-gabriel-palazzini-es.pdf" 
+              download="CV-Gabriel-Palazzini-ES.pdf"
+              className="px-6 py-2.5 bg-gray-800 border border-cyan-500/30 rounded-lg hover:bg-cyan-500/10 transition inline-flex items-center gap-2 text-sm group"
+            >
+              <Download className="w-4 h-4 group-hover:scale-110 transition" />
+              <span>Descargar CV (Español)</span>
+            </a>
+            <a 
+              href="/resume-gabriel-palazzini-en.pdf" 
+              download="Resume-Gabriel-Palazzini-EN.pdf"
+              className="px-6 py-2.5 bg-gray-800 border border-blue-500/30 rounded-lg hover:bg-blue-500/10 transition inline-flex items-center gap-2 text-sm group"
+            >
+              <Download className="w-4 h-4 group-hover:scale-110 transition" />
+              <span>Download Resume (English)</span>
+            </a>
+          </div>
           
           <div className="flex gap-6 justify-center">
             <a href="https://github.com/dekapala" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition">
@@ -271,7 +269,6 @@ const chatEndRef = useRef<HTMLDivElement>(null);
         </div>
       </section>
 
-      {/* Quick Stats */}
       <section className="py-12 px-6 bg-gray-900/50 border-y border-gray-800">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center">
@@ -293,7 +290,6 @@ const chatEndRef = useRef<HTMLDivElement>(null);
         </div>
       </section>
 
-      {/* About */}
       <section id="about" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
@@ -334,7 +330,6 @@ const chatEndRef = useRef<HTMLDivElement>(null);
         </div>
       </section>
 
-      {/* Projects */}
       <section id="projects" className="py-20 px-6 bg-gray-900/50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
@@ -390,7 +385,6 @@ const chatEndRef = useRef<HTMLDivElement>(null);
         </div>
       </section>
 
-      {/* Skills */}
       <section id="skills" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
@@ -472,7 +466,6 @@ const chatEndRef = useRef<HTMLDivElement>(null);
         </div>
       </section>
 
-      {/* Contact */}
       <section id="contact" className="py-20 px-6 bg-gray-900/50">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
@@ -507,7 +500,6 @@ const chatEndRef = useRef<HTMLDivElement>(null);
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-8 px-6 border-t border-gray-800">
         <div className="text-center text-gray-500 text-sm">
           <div className="flex items-center justify-center gap-2 mb-2">
@@ -518,7 +510,6 @@ const chatEndRef = useRef<HTMLDivElement>(null);
         </div>
       </footer>
 
-      {/* Chatbot Button */}
       {!chatOpen && (
         <button
           onClick={() => setChatOpen(true)}
@@ -532,7 +523,6 @@ const chatEndRef = useRef<HTMLDivElement>(null);
         </button>
       )}
 
-      {/* Chatbot */}
       {chatOpen && (
         <div className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-3rem)] bg-gray-900 border border-cyan-500/30 rounded-2xl shadow-2xl flex flex-col">
           <div className="bg-gradient-to-r from-cyan-500 to-blue-500 p-4 rounded-t-2xl flex justify-between items-center">
