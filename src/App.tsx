@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Github, Linkedin, Mail, Phone, Shield, Terminal, Code, Lock, Server, Brain, Sparkles, ChevronDown, ExternalLink, Download, MapPin, Briefcase, Award, MessageCircle, Send, X } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Github, Linkedin, Mail, Phone, Shield, Code, Lock, Server, Brain, Sparkles, ExternalLink, Download, MessageCircle, Send, X } from 'lucide-react';
 
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState('all');
   const [chatOpen, setChatOpen] = useState(false);
-  const [messages, setMessages] = useState([]);
+ const [messages, setMessages] = useState<Array<{role: string; content: string}>>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const chatEndRef = useRef(null);
+const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -70,11 +70,11 @@ export default function Portfolio() {
     }
   };
 
-  const findBestAnswer = (userInput) => {
+  const findBestAnswer = (userInput: string) => {
     const input = userInput.toLowerCase().trim();
     
     // Buscar coincidencias en la base de conocimientos
-    for (const [key, data] of Object.entries(knowledgeBase)) {
+   for (const [, data] of Object.entries(knowledgeBase)) {
       const hasMatch = data.keywords.some(keyword => input.includes(keyword));
       if (hasMatch) {
         return data.answer;
