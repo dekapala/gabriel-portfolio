@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, FormEvent, ChangeEvent } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { FormEvent, ChangeEvent } from "react";
 import { Terminal, MapPin, Briefcase, Award } from "lucide-react";
 
 // --- Tipos explícitos para evitar 'never[]' e 'any' ---
@@ -49,14 +50,12 @@ const App = () => {
 
   return (
     <div className="min-h-screen w-full bg-neutral-950 text-neutral-100">
-      {/* Header bonito para que los íconos importados se usen realmente */}
+      {/* Header para usar los íconos importados */}
       <header className="sticky top-0 z-10 w-full border-b border-neutral-800 bg-neutral-900/70 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
           <div className="flex items-center gap-2">
             <Terminal className="h-5 w-5" aria-hidden />
-            <h1 className="text-sm font-semibold tracking-wide">
-              Gabriel • Portfolio
-            </h1>
+            <h1 className="text-sm font-semibold tracking-wide">Gabriel • Portfolio</h1>
           </div>
           <nav className="flex items-center gap-4 text-xs text-neutral-300">
             <span className="inline-flex items-center gap-1">
@@ -84,9 +83,7 @@ const App = () => {
           <div className="max-h-[60vh] overflow-y-auto px-4 py-4">
             {messages.map((m, idx) => (
               <div key={idx} className="mb-3">
-                <div className="text-[11px] uppercase tracking-wide text-neutral-400">
-                  {m.role}
-                </div>
+                <div className="text-[11px] uppercase tracking-wide text-neutral-400">{m.role}</div>
                 <div className="whitespace-pre-wrap rounded-lg bg-neutral-800/60 px-3 py-2 text-sm">
                   {m.content}
                 </div>
@@ -105,7 +102,7 @@ const App = () => {
             />
             <button
               type="submit"
-              className="rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm hover:bg-neutral-750"
+              className="rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm hover:bg-neutral-700"
             >
               Enviar
             </button>
