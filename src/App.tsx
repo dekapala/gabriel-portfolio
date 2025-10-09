@@ -159,9 +159,15 @@ export default function App() {
             </div>
           </div>
           <nav className="hidden items-center gap-6 text-xs text-neutral-300 md:flex">
-            <span className="inline-flex items-center gap-1"><MapPin className="h-4 w-4" /> Buenos Aires, AR</span>
-            <span className="inline-flex items-center gap-1"><Briefcase className="h-4 w-4" /> 11+ años</span>
-            <span className="inline-flex items-center gap-1"><Award className="h-4 w-4" /> 6 certs</span>
+            <span className="inline-flex items-center gap-1">
+              <MapPin className="h-4 w-4" /> Buenos Aires, AR
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <Briefcase className="h-4 w-4" /> 11+ años
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <Award className="h-4 w-4" /> 6 certs
+            </span>
           </nav>
         </div>
       </header>
@@ -222,4 +228,130 @@ export default function App() {
                 <div className="mb-2 flex items-start justify-between">
                   <h3 className="text-base font-semibold text-cyan-400">{p.title}</h3>
                   {p.repo && (
-                    <a className="text-neutral-400 hover:text
+                    <a className="text-neutral-400 hover:text-cyan-400" href={p.repo} target="_blank" rel="noreferrer">
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  )}
+                </div>
+                <p className="mb-4 text-sm text-neutral-300 leading-relaxed">{p.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {p.tags.map(t => <Badge key={t}>{t}</Badge>)}
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-sm text-neutral-400 italic">✨ Todos desarrollados 100% con IA (ChatGPT, Claude, Gemini)</p>
+        </Section>
+
+        <Section title="Habilidades Técnicas" icon={<Cpu className="h-5 w-5" />}>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {SKILLS.map(s => (
+              <div key={s.group} className="rounded-xl border border-neutral-800/50 bg-neutral-900/50 p-4">
+                <div className="mb-3 text-sm font-semibold text-cyan-400">{s.group}</div>
+                <ul className="space-y-1.5 text-sm text-neutral-300">
+                  {s.items.map(i => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="mt-1.5 h-1 w-1 rounded-full bg-cyan-400 flex-shrink-0" />
+                      <span>{i}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        <Section title="Educación y Certificaciones" icon={<Award className="h-5 w-5" />}>
+          <div className="grid gap-3 md:grid-cols-2">
+            {CERTIFICATIONS.map((cert, idx) => (
+              <div key={idx} className="flex items-start gap-3 rounded-xl border border-neutral-800/50 bg-neutral-900/50 p-4">
+                <Award className="h-5 w-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-neutral-300">{cert}</span>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        <Section title="Experiencia Laboral" icon={<Briefcase className="h-5 w-5" />}>
+          <div className="rounded-xl border border-neutral-800/50 bg-neutral-900/50 p-5">
+            <div className="mb-2">
+              <h3 className="font-semibold text-cyan-400">Analista Técnico de Operaciones Regionales</h3>
+              <p className="text-sm text-neutral-400">Telecom Argentina • Nov 2016 - Actualidad</p>
+            </div>
+            <ul className="mt-3 space-y-2 text-sm text-neutral-300">
+              <li className="flex items-start gap-2">
+                <span className="mt-1.5 h-1 w-1 rounded-full bg-cyan-400 flex-shrink-0" />
+                <span>Monitoreo preventivo de redes HFC con ServAssure NXT y Grafana</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1.5 h-1 w-1 rounded-full bg-cyan-400 flex-shrink-0" />
+                <span>Gestión de fallas masivas, optimizando tiempos de resolución</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1.5 h-1 w-1 rounded-full bg-cyan-400 flex-shrink-0" />
+                <span>Soporte técnico avanzado (Internet, LAN/WAN, VoIP, FTTH, DNS/DHCP)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1.5 h-1 w-1 rounded-full bg-cyan-400 flex-shrink-0" />
+                <span>Coordinación con equipos NOC y Sistemas</span>
+              </li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section title="Asistente Interactivo" icon={<Terminal className="h-5 w-5" />}>
+          <div className="rounded-xl border border-neutral-800/50 bg-neutral-900 p-4">
+            <div className="mb-3 max-h-[40vh] min-h-[200px] overflow-y-auto space-y-3">
+              {messages.map((m, idx) => (
+                <div key={idx} className="space-y-1">
+                  <div className="text-[10px] uppercase tracking-wider text-neutral-500">
+                    {m.role === "user" ? "→ USER" : "← ASSISTANT"}
+                  </div>
+                  <div className={`rounded-lg px-4 py-3 text-sm leading-relaxed ${m.role === "user" ? "bg-cyan-950/30 border border-cyan-800/50 text-neutral-200" : "bg-neutral-800/50 border border-neutral-700/50 text-neutral-300"}`}>
+                    {m.content}
+                  </div>
+                </div>
+              ))}
+              <div ref={endRef} />
+            </div>
+
+            <div className="mt-4 flex items-center gap-2">
+              <input
+                value={input}
+                onChange={handleChange}
+                onKeyPress={handleKeyPress}
+                placeholder="Preguntame sobre experiencia, proyectos, skills..."
+                className="flex-1 rounded-lg border border-neutral-700/50 bg-neutral-800/50 px-4 py-2.5 text-sm outline-none focus:border-cyan-700 focus:bg-neutral-800 transition-colors placeholder:text-neutral-500"
+              />
+              <button onClick={handleSend} className="rounded-lg border border-cyan-800/50 bg-cyan-950/30 px-4 py-2.5 text-sm hover:bg-cyan-900/30 transition-colors">
+                Enviar
+              </button>
+            </div>
+          </div>
+          <p className="mt-3 text-xs text-neutral-500 text-center">
+            Preguntá sobre experiencia, proyectos, skills, certificaciones o contacto
+          </p>
+        </Section>
+      </main>
+
+      <footer className="border-t border-neutral-800/50 bg-neutral-900/50 py-6">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="flex flex-col items-center gap-3 text-center text-sm text-neutral-400">
+            <div className="flex items-center gap-4">
+              <a href="https://github.com/dekapala" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">
+                <Github className="h-5 w-5" />
+              </a>
+              <a href="https://linkedin.com/in/gabrielpalazzini" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a href="mailto:gabrielleandro.p@outlook.com" className="hover:text-cyan-400 transition-colors">
+                <Mail className="h-5 w-5" />
+              </a>
+            </div>
+            <p>© {new Date().getFullYear()} Gabriel Palazzini — Desarrollado con Vite + React + TypeScript + IA</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
