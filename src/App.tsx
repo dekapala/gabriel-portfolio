@@ -5,6 +5,21 @@ import { Terminal, MapPin, Briefcase, Award } from "lucide-react";
 type ChatRole = "user" | "assistant" | "system";
 type ChatMessage = { role: ChatRole; content: string };
 
+// Rutas a los PDFs (tal como están en /public)
+// encodeURI() maneja los espacios correctamente.
+const CV_LINKS = [
+  {
+    label: "CV Español (PDF)",
+    href: encodeURI("/CV - Gabriel Leandro Palazzini- ES.pdf"),
+    download: "cv-gabriel-palazzini-es.pdf",
+  },
+  {
+    label: "CV English (PDF)",
+    href: encodeURI("/CV - Gabriel Leandro Palazzini- EN.pdf"),
+    download: "resume-gabriel-palazzini-en.pdf",
+  },
+];
+
 // --- Componente principal ---
 const App = () => {
   // Ref para auto-scroll al final del chat
@@ -49,7 +64,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen w-full bg-neutral-950 text-neutral-100">
-      {/* Header bonito para que los íconos importados se usen realmente */}
+      {/* Header */}
       <header className="sticky top-0 z-10 w-full border-b border-neutral-800 bg-neutral-900/70 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
           <div className="flex items-center gap-2">
@@ -74,6 +89,28 @@ const App = () => {
 
       {/* Contenido principal */}
       <main className="mx-auto max-w-5xl px-4 py-6">
+        {/* Currículums */}
+        <section className="mb-6 rounded-xl border border-neutral-800 bg-neutral-900">
+          <div className="border-b border-neutral-800 px-4 py-2 text-xs text-neutral-400">
+            Currículums
+          </div>
+          <div className="grid gap-3 p-4 sm:grid-cols-2">
+            {CV_LINKS.map(({ label, href, download }) => (
+              <a
+                key={href}
+                href={href}
+                download={download}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-between rounded-lg border border-neutral-700 bg-neutral-800/60 px-4 py-3 text-sm hover:bg-neutral-800 hover:border-neutral-600 transition-colors"
+              >
+                <span>{label}</span>
+                <span className="text-[11px] text-neutral-400">{download}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
         {/* Panel de “consola/chat” */}
         <section className="rounded-xl border border-neutral-800 bg-neutral-900">
           <div className="border-b border-neutral-800 px-4 py-2 text-xs text-neutral-400">
@@ -89,35 +126,3 @@ const App = () => {
                 </div>
                 <div className="whitespace-pre-wrap rounded-lg bg-neutral-800/60 px-3 py-2 text-sm">
                   {m.content}
-                </div>
-              </div>
-            ))}
-            <div ref={endRef} />
-          </div>
-
-          {/* Input */}
-          <form onSubmit={handleSubmit} className="flex items-center gap-2 border-t border-neutral-800 p-3">
-            <input
-              value={input}
-              onChange={handleChange}
-              placeholder="Escribí un comando o pregunta..."
-              className="flex-1 rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm outline-none focus:border-neutral-500"
-            />
-            <button
-              type="submit"
-              className="rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm hover:bg-neutral-750"
-            >
-              Enviar
-            </button>
-          </form>
-        </section>
-      </main>
-
-      <footer className="mx-auto max-w-5xl px-4 pb-8 pt-2 text-center text-xs text-neutral-500">
-        © {new Date().getFullYear()} Gabriel Palazzini — Hecho con Vite + React + TS
-      </footer>
-    </div>
-  );
-};
-
-export default App;
