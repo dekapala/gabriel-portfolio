@@ -1,3 +1,4 @@
+import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent } from "react";
 import {
@@ -13,8 +14,16 @@ type Project = { title: string; description: string; tags: string[]; repo?: stri
 type Skill = { group: string; items: string[] };
 
 const CV_LINKS: CVLink[] = [
-  { label: "CV Español (PDF)", href: "/cv-espanol.pdf", fileName: "cv-gabriel-palazzini-es.pdf" },
-  { label: "CV English (PDF)", href: "/cv-english.pdf", fileName: "cv-gabriel-palazzini-en.pdf" },
+  {
+    label: "CV Español (PDF)",
+    href: "/cv-gabriel-palazzini-es.pdf",
+    fileName: "cv-gabriel-palazzini-es.pdf",
+  },
+  {
+    label: "CV English (PDF)",
+    href: "/resume-gabriel-palazzini-en.pdf",
+    fileName: "resume-gabriel-palazzini-en.pdf",
+  },
 ];
 
 const PROJECTS: Project[] = [
@@ -98,7 +107,7 @@ const Section: React.FC<{ title: string; icon?: React.ReactNode; children: React
   </section>
 );
 
-// Knowledge Base mejorado con más keywords
+// Knowledge Base
 const knowledgeBase: Record<string, { keywords: string[]; answer: string }> = {
   quien: {
     keywords: ['quien', 'quién', 'gabriel', 'palazzini', 'sobre ti', 'about', 'presentate', 'conocerte'],
@@ -181,7 +190,8 @@ export default function App() {
     setInput("");
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  // Nuevo handler: reemplaza onKeyPress (deprecado)
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") handleSend();
   };
 
@@ -218,7 +228,7 @@ export default function App() {
       </header>
 
       <main className="mx-auto grid max-w-6xl gap-6 px-4 py-8">
-        {/* Hero Section Mejorado */}
+        {/* Hero Section */}
         <Section title="Network Analyst → Cybersecurity Engineer" icon={<Shield className="h-6 w-6" />}>
           <div className="grid gap-6 md:grid-cols-[1fr_auto]">
             <div className="space-y-5">
@@ -290,8 +300,13 @@ export default function App() {
         {/* CVs */}
         <Section title="Currículums" icon={<Download className="h-5 w-5" />}>
           <div className="grid gap-3 sm:grid-cols-2">
-            {CV_LINKS.map((cv, idx) => (
-              <a key={idx} className="flex items-center justify-between rounded-xl border border-neutral-700/50 bg-neutral-800/40 px-5 py-4 text-sm font-medium hover:bg-neutral-800/60 hover:border-cyan-700/50 transition-all group shadow-lg" href={cv.href} download={cv.fileName}>
+            {CV_LINKS.map((cv) => (
+              <a
+                key={cv.href}
+                className="flex items-center justify-between rounded-xl border border-neutral-700/50 bg-neutral-800/40 px-5 py-4 text-sm font-medium hover:bg-neutral-800/60 hover:border-cyan-700/50 transition-all group shadow-lg"
+                href={cv.href}
+                download={cv.fileName}
+              >
                 <span>{cv.label}</span>
                 <Download className="h-4 w-4 text-neutral-400 group-hover:text-cyan-400 transition-colors" />
               </a>
@@ -386,7 +401,7 @@ export default function App() {
           </div>
         </Section>
 
-        {/* Chatbot Mejorado */}
+        {/* Chatbot */}
         <Section title="Asistente Interactivo IA" icon={<Terminal className="h-5 w-5" />}>
           <div className="rounded-xl border border-neutral-800/60 bg-neutral-900/90 p-4 shadow-lg">
             <div className="mb-3 max-h-[45vh] min-h-[250px] overflow-y-auto space-y-3 pr-2">
@@ -407,7 +422,7 @@ export default function App() {
               <input
                 value={input}
                 onChange={handleChange}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyDown}
                 placeholder="Ej: ¿Quién es Gabriel? ¿Por qué contratarlo? ¿Qué experiencia tiene?"
                 className="flex-1 rounded-lg border border-neutral-700/50 bg-neutral-800/60 px-4 py-3 text-sm outline-none focus:border-cyan-600 focus:bg-neutral-800 transition-all placeholder:text-neutral-500 shadow-inner"
               />
