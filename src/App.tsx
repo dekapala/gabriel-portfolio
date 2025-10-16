@@ -255,11 +255,7 @@ const App = () => {
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div
-                className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                  darkMode ? 'bg-cyan-500/10' : 'bg-cyan-500/20'
-                }`}
-              >
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${darkMode ? 'bg-cyan-500/10' : 'bg-cyan-500/20'}`}>
                 <Shield className="w-5 h-5 text-cyan-400" />
               </div>
               <div>
@@ -577,7 +573,7 @@ const App = () => {
                     <h4 className="font-semibold">Soporte Técnico Corporativo</h4>
                     <p className="text-sm text-cyan-400">Telecom Argentina</p>
                   </div>
-                  <span className={`text-xs ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>Jun 2015 - Nov 2016</span>
+                    <span className={`text-xs ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>Jun 2015 - Nov 2016</span>
                 </div>
                 <ul className={`text-sm space-y-1 ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>
                   <li>• Soporte a servicios corporativos: IPs fijas, DNS, registros MX/SPF/A</li>
