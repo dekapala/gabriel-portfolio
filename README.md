@@ -41,9 +41,9 @@ La página tiene español e inglés, tema claro y oscuro, navegación responsive
 
 ## Precisión del contenido
 
-PRISMA está en uso por la gerencia. Gabriel realizó su frontend y backend con asistencia de IA. GIPSO tiene el mismo alcance de autoría y su inicio de uso está previsto para noviembre de 2026. Actualizar ese estado cuando se confirme la adopción. En GuIA, Gabriel colaboró con el responsable de crear los agentes en parte de los system prompts y las instrucciones de respuesta.
+El bloque Proyectos describe únicamente la finalidad de PRISMA, GIPSO, MEL y GuIA. No muestra fechas, estados de lanzamiento ni stacks. Las fechas de cargos y formación se conservan. La experiencia laboral explica el desarrollo del frontend y backend de PRISMA y GIPSO con asistencia de IA. En GuIA, Gabriel colaboró con el responsable de crear los agentes en parte de los system prompts y las instrucciones de respuesta.
 
-Los stacks describen las tecnologías de los desarrollos, no dominio autónomo de programación. No se agregan métricas de ahorro, usuarios o resultados que no estén confirmados. Las fechas individuales de participación en PRISMA requieren precisión y no se inventan. Los estudios universitarios se presentan como estudios cursados y CCNA como formación. No se afirma que las certificaciones vencidas estén vigentes.
+Las competencias describen herramientas y conocimientos reales; se evita atribuir dominio autónomo de programación por la presencia de una tecnología en un desarrollo. No se agregan métricas de ahorro, usuarios o resultados que no estén confirmados. Las fechas individuales de participación en PRISMA requieren precisión y no se inventan. Los estudios universitarios se presentan como estudios cursados y CCNA como formación. No se afirma que las certificaciones vencidas estén vigentes.
 
 ## Vista autónoma
 
@@ -55,6 +55,6 @@ Genera `.build/Palazzini-Portfolio.html`, un CV web con los recursos integrados 
 
 ## Verificación
 
-`npm run build` valida TypeScript, compila y prerenderiza. `npm test` verifica estructura de CV, cargos y fechas, aportes de PEM, estados de adopción, contacto laboral, enlace al CV imprimible, idiomas, tema, menú/Escape, clipboard, preferencias, hidratación y reglas de axe-core salvo contraste.
+`npm run build` valida TypeScript, compila y prerenderiza. `npm test` verifica estructura de CV, cargos y fechas, proyectos de PEM sin fechas ni estados de lanzamiento, contacto laboral, enlace al CV imprimible, idiomas, tema, menú/Escape, clipboard, preferencias, hidratación y reglas de axe-core salvo contraste.
 
 El entorno local bloquea Chromium y el inicio del servidor HTTP, por lo que queda pendiente la revisión visual real, el contraste y la paginación de impresión en navegador. Las pruebas de DOM no se presentan como una validación visual.
