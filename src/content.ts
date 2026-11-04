@@ -1,0 +1,68 @@
+export type Lang = 'es' | 'en'
+export const content = {
+  es: {
+    nav: ['Perfil', 'Experiencia', 'Competencias', 'Formación'], contact: 'Contacto laboral', cvLabel: 'Curriculum vitae', updated: 'Actualizado · Noviembre 2026', location: 'Buenos Aires, Argentina', seeking: 'En búsqueda de nuevas oportunidades',
+    headline: 'Analista de operaciones', specialty: 'Telecomunicaciones · Mejora de procesos · IA aplicada',
+    summary: 'Más de 12 años de experiencia en telecomunicaciones, con una evolución desde soporte técnico residencial y corporativo hasta análisis regional de redes. Desde abril de 2026 colaboro con el equipo PEM en herramientas internas, automatización y mejora de procesos mediante inteligencia artificial generativa.',
+    summaryMore: 'Aporto conocimiento de la operación, definición de necesidades y validación funcional. Desarrollo interfaces y componentes de backend con asistencia de IA, y colaboro en las instrucciones y criterios de respuesta de agentes conversacionales.',
+    cv: 'CV para imprimir / PDF', email: 'Contactar por una oportunidad', interests: 'Áreas de interés', interestsText: 'Análisis de operaciones, mejora de procesos, automatización operativa e IA aplicada.',
+    profileTitle: 'Perfil profesional', experienceTitle: 'Experiencia laboral', employer: 'Telecom Argentina · Fibercorp · Fibertel', tenure: 'Mayo de 2014 — actualidad', companyNote: 'Trayectoria dentro de Telecom Argentina y sus antecesoras.',
+    roles: [
+      { date: 'Abril de 2026 — actualidad', title: 'Colaboración con PEM · Mejora de procesos e IA aplicada', area: 'Performance, Eficiencia y Mejora', note: 'Colaboración interna en paralelo al cargo formal de Analista Regional.', bullets: ['Traducción de necesidades del sector en requisitos, flujos e interfaces para herramientas internas.', 'Desarrollo del frontend y backend de herramientas como PRISMA y GIPSO con asistencia de Claude Code y Codex, con revisión e iteración sobre los resultados.', 'Colaboración con el responsable de desarrollo de agentes en la elaboración de system prompts e instrucciones de comportamiento y respuesta.'] },
+      { date: 'Noviembre de 2016 — actualidad', title: 'Analista Técnico de Operaciones Regionales', area: 'Telecom Argentina · Field Service', note: '', bullets: ['Monitoreo y análisis del estado de la red mediante Grafana y Service Assure para detectar fallas masivas y degradaciones del servicio.', 'Análisis de infraestructura HFC/DOCSIS: nodos, CMTS, HUB, amplificadores y TAP; revisión de niveles de señal RX, TX y MER.', 'Coordinación con el Centro de Operaciones de Red (NOC) para reportar y escalar incidentes.', 'Generación de tickets de red para canalizar órdenes e intervenciones de técnicos de campo y seguimiento hasta su resolución.', 'Análisis de problemas de desempeño de clientes VIP y coordinación de acciones para recuperar la calidad del servicio.'] },
+      { date: 'Junio de 2015 — noviembre de 2016', title: 'Soporte Técnico Corporativo', area: 'Fibercorp · Gerencia Técnica', note: '', bullets: ['Soporte a clientes corporativos sobre enlaces de fibra óptica, cablemódem y servicios simétricos y asimétricos.', 'Gestión de IP, DNS y registros A, MX y SPF; altas, bajas y modificaciones de hosting y bases MySQL dentro del servicio de soporte.', 'Registro y seguimiento de casos mediante CRM.'] },
+      { date: 'Mayo de 2014 — junio de 2015', title: 'Soporte Técnico Residencial', area: 'Fibertel', note: '', bullets: ['Diagnóstico y soporte de servicios de Internet, cablemódem DOCSIS y decodificadores STB.', 'Atención de reclamos y soporte de correo, hosting, VPN, VoIP y CATV.'] },
+    ],
+    contributionsTitle: 'Proyectos', contributionsNote: 'Iniciativas orientadas a la planificación, la gestión operativa y el soporte técnico.',
+    contributions: [
+      { name: 'Seguimiento operativo · PRISMA', description: 'Panel de seguimiento de órdenes de trabajo de Fulfillment, indicadores y gestiones colaborativas del equipo.' },
+      { name: 'Planificación de personal · GIPSO', description: 'Herramienta para organizar rotaciones, licencias, vacaciones y cobertura de equipos de soporte operativo.' },
+      { name: 'Gestión de solicitudes · MEL', description: 'Sistema para centralizar pedidos, mejoras e ideas, con asignación de responsables y seguimiento de su gestión.' },
+      { name: 'Asistentes de soporte técnico · GuIA', description: 'Agentes conversacionales orientados a consultar procedimientos y brindar orientación al técnico en su trabajo.' },
+    ],
+    skillsTitle: 'Competencias y herramientas', skills: [
+      ['Operaciones de red', 'Monitoreo, diagnóstico, gestión y escalamiento de incidentes. Coordinación con NOC y técnicos de campo. Seguimiento de órdenes de trabajo.'],
+      ['Mejora de procesos', 'Identificación de necesidades, definición de requisitos, automatización de flujos y revisión funcional de herramientas e interfaces.'],
+      ['IA aplicada', 'Claude Code, Codex, ChatGPT y Gemini. Orquestación de agentes, prompting y colaboración en instrucciones de sistema.'],
+      ['Herramientas de trabajo', 'Grafana, Service Assure, Visual Studio Code y CRM. Conocimientos básicos de SQL.'],
+    ], skillsNote: 'Uso de IA para asistir la implementación de código, con aporte propio en definición funcional, revisión e iteración de las soluciones.',
+    educationTitle: 'Formación', education: [
+      ['2020–2021', 'Formación CCNA v7', 'Cisco Networking Academy', 'Introducción a las redes; Switching, Routing and Wireless Essentials.'],
+      ['2021–2022', 'Experto Universitario en Hacking Ético', 'Centro de e-Learning UTN FRBA', 'Octubre de 2021 — marzo de 2022.'],
+      ['2014–2015', 'Estudios de Licenciatura en Sistemas', 'Universidad Nacional de Lanús', ''],
+      ['2017', 'Estudios de Sistemas de Información', 'UADE', ''],
+    ], coursesTitle: 'Formación complementaria', courses: [['2024', 'Junior Cybersecurity Analyst Career Path', 'Cisco'], ['2023', 'Cloud Computing: Infraestructuras en la Nube', 'EducaciónIT']],
+    languagesTitle: 'Idiomas', languages: [['Español', 'Nativo'], ['Inglés', 'Competencia profesional de trabajo']],
+    contactTitle: 'Contacto para oportunidades laborales', contactText: 'Interesado en posiciones donde pueda aportar mi experiencia en operaciones y seguir desarrollándome en mejora de procesos e IA aplicada.', copy: 'Copiar email', copied: 'Email copiado', copyError: 'Podés escribir a la dirección indicada.', footer: 'Curriculum vitae · Gabriel Leandro Palazzini', top: 'Volver al inicio', theme: 'Cambiar tema', menu: 'Abrir navegación', skip: 'Ir al contenido',
+  },
+  en: {
+    nav: ['Profile', 'Experience', 'Skills', 'Education'], contact: 'Recruitment contact', cvLabel: 'Curriculum vitae', updated: 'Updated · November 2026', location: 'Buenos Aires, Argentina', seeking: 'Open to new career opportunities',
+    headline: 'Operations Analyst', specialty: 'Telecommunications · Process improvement · Applied AI',
+    summary: 'Over 12 years of experience in telecommunications, progressing from residential and corporate technical support to regional network analysis. Since April 2026, I have collaborated with the PEM team on internal tools, automation and process improvement using generative AI.',
+    summaryMore: 'I contribute operational knowledge, requirements definition and functional validation. I develop interfaces and backend components with AI assistance and collaborate on instructions and response criteria for conversational agents.',
+    cv: 'Printable CV / PDF · ES', email: 'Contact about an opportunity', interests: 'Career interests', interestsText: 'Operations analysis, process improvement, operational automation and applied AI.',
+    profileTitle: 'Professional profile', experienceTitle: 'Work experience', employer: 'Telecom Argentina · Fibercorp · Fibertel', tenure: 'May 2014 — present', companyNote: 'Career within Telecom Argentina and its predecessors.',
+    roles: [
+      { date: 'April 2026 — present', title: 'Collaboration with PEM · Process improvement & applied AI', area: 'Performance, Efficiency and Improvement', note: 'Internal collaboration alongside my formal Regional Analyst position.', bullets: ['Translate operational needs into requirements, workflows and interfaces for internal tools.', 'Develop the frontend and backend of tools such as PRISMA and GIPSO with Claude Code and Codex assistance, reviewing and iterating on outcomes.', 'Collaborate with the agent developer on system prompts, behavior instructions and response criteria.'] },
+      { date: 'November 2016 — present', title: 'Regional Technical Operations Analyst', area: 'Telecom Argentina · Field Service', note: '', bullets: ['Monitor and analyze network health with Grafana and Service Assure to detect widespread faults and service degradation.', 'Analyze HFC/DOCSIS infrastructure: nodes, CMTS, HUBs, amplifiers and TAPs; review RX, TX and MER signal levels.', 'Coordinate incident reporting and escalation with the Network Operations Center (NOC).', 'Create network tickets to initiate work orders and field interventions, following up through resolution.', 'Investigate performance issues affecting VIP customers and coordinate actions to restore service quality.'] },
+      { date: 'June 2015 — November 2016', title: 'Corporate Technical Support', area: 'Fibercorp · Technical Department', note: '', bullets: ['Support corporate customers on fiber links, cable modems and symmetrical and asymmetrical services.', 'Manage IP, DNS and A, MX and SPF records; hosting and MySQL account administration within the support service.', 'Record and follow up on cases through CRM.'] },
+      { date: 'May 2014 — June 2015', title: 'Residential Technical Support', area: 'Fibertel', note: '', bullets: ['Troubleshoot Internet services, DOCSIS cable modems and set-top boxes.', 'Handle service complaints and support email, hosting, VPN, VoIP and CATV.'] },
+    ],
+    contributionsTitle: 'Projects', contributionsNote: 'Initiatives focused on planning, operational management and technical support.',
+    contributions: [
+      { name: 'Operations monitoring · PRISMA', description: 'Dashboard for Fulfillment work-order tracking, indicators and collaborative team activity.' },
+      { name: 'Workforce planning · GIPSO', description: 'Tool for organizing rotations, leave, vacations and coverage of operational support teams.' },
+      { name: 'Request management · MEL', description: 'System for centralizing requests, improvements and ideas, assigning owners and tracking progress.' },
+      { name: 'Technical support assistants · GuIA', description: 'Conversational agents focused on finding procedures and guiding technicians in their work.' },
+    ],
+    skillsTitle: 'Skills and tools', skills: [
+      ['Network operations', 'Monitoring, troubleshooting, incident management and escalation. Coordination with NOC and field technicians. Work-order follow-up.'],
+      ['Process improvement', 'Needs assessment, requirements definition, workflow automation and functional review of tools and interfaces.'],
+      ['Applied AI', 'Claude Code, Codex, ChatGPT and Gemini. Agent orchestration, prompting and collaboration on system instructions.'],
+      ['Working tools', 'Grafana, Service Assure, Visual Studio Code and CRM. Basic SQL knowledge.'],
+    ], skillsNote: 'AI-assisted code implementation, with my contribution in functional definition, review and iteration of solutions.',
+    educationTitle: 'Education', education: [['2020–2021', 'CCNA v7 coursework', 'Cisco Networking Academy', 'Introduction to Networks; Switching, Routing and Wireless Essentials.'], ['2021–2022', 'University Expert in Ethical Hacking', 'UTN FRBA e-Learning Center', 'October 2021 — March 2022.'], ['2014–2015', 'Information Systems studies', 'Universidad Nacional de Lanús', ''], ['2017', 'Information Systems studies', 'UADE', '']],
+    coursesTitle: 'Additional training', courses: [['2024', 'Junior Cybersecurity Analyst Career Path', 'Cisco'], ['2023', 'Cloud Computing: Cloud Infrastructure', 'EducaciónIT']], languagesTitle: 'Languages', languages: [['Spanish', 'Native'], ['English', 'Professional working proficiency']],
+    contactTitle: 'Contact for career opportunities', contactText: 'Interested in positions where I can contribute my operational experience and continue developing in process improvement and applied AI.', copy: 'Copy email', copied: 'Email copied', copyError: 'You can write to the email address shown.', footer: 'Curriculum vitae · Gabriel Leandro Palazzini', top: 'Back to top', theme: 'Change theme', menu: 'Open navigation', skip: 'Skip to content',
+  },
+}
