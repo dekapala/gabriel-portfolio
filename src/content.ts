@@ -32,7 +32,7 @@ export const content = {
       ['2014–2015', 'Estudios de Licenciatura en Sistemas', 'Universidad Nacional de Lanús', ''],
       ['2017', 'Estudios de Sistemas de Información', 'UADE', ''],
     ], coursesTitle: 'Formación complementaria', courses: [['2024', 'Junior Cybersecurity Analyst Career Path', 'Cisco'], ['2023', 'Cloud Computing: Infraestructuras en la Nube', 'EducaciónIT']],
-    languagesTitle: 'Idiomas', languages: [['Español', 'Nativo'], ['Inglés', 'Competencia profesional de trabajo']],
+    languagesTitle: 'Idiomas', languages: [['Español', 'Nativo'], ['Inglés', 'Buen manejo de lectura y escritura; conversación en desarrollo']],
     contactTitle: 'Contacto para oportunidades laborales', contactText: 'Interesado en posiciones donde pueda aportar mi experiencia en operaciones y seguir desarrollándome en mejora de procesos e IA aplicada.', copy: 'Copiar email', copied: 'Email copiado', copyError: 'Podés escribir a la dirección indicada.', footer: 'Curriculum vitae · Gabriel Leandro Palazzini', top: 'Volver al inicio', theme: 'Cambiar tema', menu: 'Abrir navegación', skip: 'Ir al contenido',
   },
   en: {
@@ -62,7 +62,7 @@ export const content = {
       ['Working tools', 'Grafana, Service Assure, Visual Studio Code and CRM. Basic SQL knowledge.'],
     ], skillsNote: 'AI-assisted code implementation, with my contribution in functional definition, review and iteration of solutions.',
     educationTitle: 'Education', education: [['2020–2021', 'CCNA v7 coursework', 'Cisco Networking Academy', 'Introduction to Networks; Switching, Routing and Wireless Essentials.'], ['2021–2022', 'University Expert in Ethical Hacking', 'UTN FRBA e-Learning Center', 'October 2021 — March 2022.'], ['2014–2015', 'Information Systems studies', 'Universidad Nacional de Lanús', ''], ['2017', 'Information Systems studies', 'UADE', '']],
-    coursesTitle: 'Additional training', courses: [['2024', 'Junior Cybersecurity Analyst Career Path', 'Cisco'], ['2023', 'Cloud Computing: Cloud Infrastructure', 'EducaciónIT']], languagesTitle: 'Languages', languages: [['Spanish', 'Native'], ['English', 'Professional working proficiency']],
+    coursesTitle: 'Additional training', courses: [['2024', 'Junior Cybersecurity Analyst Career Path', 'Cisco'], ['2023', 'Cloud Computing: Cloud Infrastructure', 'EducaciónIT']], languagesTitle: 'Languages', languages: [['Spanish', 'Native'], ['English', 'Good reading and writing skills; spoken English in development']],
     contactTitle: 'Contact for career opportunities', contactText: 'Interested in positions where I can contribute my operational experience and continue developing in process improvement and applied AI.', copy: 'Copy email', copied: 'Email copied', copyError: 'You can write to the email address shown.', footer: 'Curriculum vitae · Gabriel Leandro Palazzini', top: 'Back to top', theme: 'Change theme', menu: 'Open navigation', skip: 'Skip to content',
   },
 }
