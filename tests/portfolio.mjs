@@ -2,51 +2,75 @@ import { JSDOM, VirtualConsole } from 'jsdom'
 import { readFile } from 'node:fs/promises'
 import assert from 'node:assert/strict'
 import axe from 'axe-core'
-const errors=[]
-const virtualConsole=new VirtualConsole()
-virtualConsole.on('jsdomError',e=>errors.push(e.message))
-virtualConsole.on('error',(...e)=>errors.push(e.join(' ')))
-const html=await readFile(new URL('../.build/Palazzini-Portfolio.html', import.meta.url),'utf8')
-const dom=new JSDOM(html,{url:'https://palazzini.dev/',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole,beforeParse(w){
-  w.IntersectionObserver=class{observe(){}disconnect(){}}
-  w.HTMLDialogElement.prototype.showModal=function(){this.setAttribute('open','')}
-  w.HTMLDialogElement.prototype.close=function(){this.removeAttribute('open')}
-  Object.defineProperty(w.navigator,'clipboard',{value:{writeText:async text=>{w.__clipboard=text}}})
-}})
-const w=dom.window,d=w.document
-const pause=()=>new Promise(r=>setTimeout(r,100))
-const click=async sel=>{const e=typeof sel==='string'?d.querySelector(sel):sel;assert.ok(e,`Found ${sel}`);e.click();await pause()}
+
+const html = await readFile(new URL('../.build/Palazzini-Portfolio.html', import.meta.url), 'utf8')
+const errors = []
+const virtualConsole = new VirtualConsole()
+virtualConsole.on('jsdomError', e => errors.push(e.message))
+virtualConsole.on('error', (...e) => errors.push(e.join(' ')))
+const pause = () => new Promise(r => setTimeout(r, 100))
+function open(preferences = {}) {
+  return new JSDOM(html, {
+    url: 'https://palazzini.dev/', runScripts: 'dangerously', pretendToBeVisual: true, virtualConsole,
+    beforeParse(w) {
+      w.IntersectionObserver = class { observe() {} disconnect() {} }
+      Object.defineProperty(w.navigator, 'clipboard', { value: { writeText: async text => { w.__clipboard = text } } })
+      for (const [key, value] of Object.entries(preferences)) w.localStorage.setItem(key, value)
+    },
+  })
+}
+const dom = open(), w = dom.window, d = w.document
+const click = async selector => { const el = d.querySelector(selector); assert.ok(el, selector); el.click(); await pause() }
 await pause()
-assert.equal(d.querySelectorAll('h1').length,1)
-assert.equal(d.querySelectorAll('.project-card').length,4)
-assert.match(d.body.textContent,/En uso por la gerencia/)
-assert.match(d.body.textContent,/Nov\. 2026/)
-await click(d.querySelectorAll('.filter-tabs button')[2]);assert.equal(d.querySelectorAll('.project-card').length,1);assert.equal(d.querySelector('.project-meta h3').textContent,'GIPSO')
-await click('.project-open');assert.ok(d.querySelector('dialog[open]'));assert.match(d.querySelector('.case-copy').textContent,/frontend y el backend con asistencia de IA/)
-await click('.dialog-top button');assert.equal(d.querySelector('dialog'),null)
-await click(d.querySelectorAll('.filter-tabs button')[0]);assert.equal(d.querySelectorAll('.project-card').length,4)
-await click(d.querySelectorAll('.network-controls button')[0]);assert.match(d.querySelector('.network-note').textContent,/Entender/)
-await click('.theme-button');assert.equal(d.documentElement.dataset.theme,'light');assert.equal(w.localStorage.getItem('gp-theme'),'light')
-await click('.language-button');assert.equal(d.documentElement.lang,'en');assert.match(d.querySelector('h1').textContent,/Operations/);assert.match(d.querySelector('.project-description').textContent,/In use by management/)
-await click('.language-button');assert.equal(d.documentElement.lang,'es')
-await click('.menu-button');assert.equal(d.querySelector('.menu-button').getAttribute('aria-expanded'),'true')
-w.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape'}));await pause();assert.equal(d.querySelector('.menu-button').getAttribute('aria-expanded'),'false')
-await click('.email-line button');assert.equal(w.__clipboard,'gabrielleandro.p@gmail.com');assert.match(d.querySelector('.copy-feedback').textContent,/Email copiado/)
-for(const p of ['prisma','gipso','mel','guia']){const card=[...d.querySelectorAll('.project-open')].find(e=>e.getAttribute('aria-label').toLowerCase().includes(p));await click(card);assert.ok(d.querySelector('dialog[open]'));await click('.dialog-top button')}
-assert.equal(errors.length,0,JSON.stringify(errors))
+assert.equal(d.querySelectorAll('h1').length, 1)
+assert.match(d.querySelector('h1').textContent, /Gabriel LeandroPalazzini/)
+assert.equal(d.documentElement.dataset.theme, 'light')
+assert.equal(d.querySelectorAll('.role').length, 4)
+assert.equal(d.querySelectorAll('.contribution').length, 4)
+const sectionIds = [...d.querySelectorAll('main section')].map(s => s.id)
+assert.deepEqual(sectionIds, ['perfil', 'experiencia', 'competencias', 'formacion', 'idiomas', 'contacto'])
+assert.ok(d.querySelector('#experiencia .current-role .contributions'), 'Contributions belong to the PEM experience')
+assert.match(d.querySelector('.role-note').textContent, /paralelo al cargo formal/)
+assert.match(d.querySelector('.status-live').textContent, /En uso por la gerencia/)
+assert.match(d.querySelector('.status-planned').textContent, /Noviembre 2026/)
+assert.match(d.querySelector('.contribution').textContent, /frontend y el backend con asistencia de IA/)
+assert.match(d.querySelector('.contact-email').href, /subject=Oportunidad%20laboral/)
+assert.equal(d.querySelectorAll('.project-card,.filter-tabs,.network-panel,dialog').length, 0)
+assert.doesNotMatch(d.body.textContent, /Explorar proyectos|¿Y si mejoramos|Conversar sobre este proyecto/)
+for (const link of d.querySelectorAll('.main-nav a')) assert.ok(d.querySelector(link.getAttribute('href')))
+assert.ok(d.querySelector('.identity-actions a').href.endsWith('/CV-Gabriel-Palazzini.html'))
+await click('.language-button')
+assert.equal(d.documentElement.lang, 'en')
+assert.match(d.querySelector('.job-title').textContent, /Operations Analyst/)
+assert.match(d.querySelector('#experiencia h2').textContent, /Work experience/)
+assert.match(d.querySelector('.status-live').textContent, /In use by management/)
+assert.match(d.querySelector('.contact-email').href, /subject=Career%20opportunity/)
+await click('.language-button')
+assert.equal(d.documentElement.lang, 'es')
+await click('.theme-button')
+assert.equal(d.documentElement.dataset.theme, 'dark')
+assert.equal(w.localStorage.getItem('gp-theme'), 'dark')
+await click('.menu-button')
+assert.equal(d.querySelector('.menu-button').getAttribute('aria-expanded'), 'true')
+w.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Escape' }))
+await pause()
+assert.equal(d.querySelector('.menu-button').getAttribute('aria-expanded'), 'false')
+await click('.menu-button')
+await click('.main-nav a')
+assert.equal(d.querySelector('.menu-button').getAttribute('aria-expanded'), 'false')
+await click('.copy-email')
+assert.equal(w.__clipboard, 'gabrielleandro.p@gmail.com')
+assert.match(d.querySelector('.copy-feedback').textContent, /Email copiado/)
 w.eval(axe.source)
-const result=await w.axe.run(d,{rules:{'color-contrast':{enabled:false}}})
-assert.equal(result.violations.length,0,JSON.stringify(result.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))))
-console.log('PASS: ES/EN, filters, 4 case dialogs, theme, network controls, menu/Escape, clipboard, hydration and static accessibility. Color contrast and visual browser QA not covered.')
+const result = await w.axe.run(d, { rules: { 'color-contrast': { enabled: false } } })
+assert.equal(result.violations.length, 0, JSON.stringify(result.violations.map(v => ({ id: v.id, targets: v.nodes.map(n => n.target) }))))
+assert.equal(errors.length, 0, JSON.stringify(errors))
 dom.window.close()
-const restored=new JSDOM(html,{url:'https://palazzini.dev/',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole,beforeParse(w){
-  w.IntersectionObserver=class{observe(){}disconnect(){}}
-  w.localStorage.setItem('gp-language','en');w.localStorage.setItem('gp-theme','light')
-}})
+const restored = open({ 'gp-language': 'en', 'gp-theme': 'dark' })
 await pause()
-assert.equal(restored.window.document.documentElement.lang,'en')
-assert.equal(restored.window.document.documentElement.dataset.theme,'light')
-assert.equal(restored.window.localStorage.getItem('gp-language'),'en')
-assert.equal(errors.length,0,JSON.stringify(errors))
+assert.equal(restored.window.document.documentElement.lang, 'en')
+assert.equal(restored.window.document.documentElement.dataset.theme, 'dark')
+assert.equal(restored.window.localStorage.getItem('gp-language'), 'en')
+assert.equal(errors.length, 0, JSON.stringify(errors))
 restored.window.close()
-console.log('PASS: saved preferences restored without hydration errors.')
+console.log('PASS: CV structure, career history, project ownership and status, recruitment contact, printable CV link, ES/EN, theme, menu, clipboard, preferences, hydration and axe rules. Visual browser QA and contrast are not covered.')
