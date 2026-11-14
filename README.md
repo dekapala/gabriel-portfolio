@@ -1,6 +1,6 @@
 # Gabriel Palazzini — CV web
 
-CV profesional orientado a selección laboral. Presenta el perfil, la experiencia, las competencias, la formación y los datos de contacto de Gabriel. Los desarrollos internos aparecen como aportes dentro de la experiencia con PEM.
+CV profesional orientado a selección laboral. Presenta el perfil, la experiencia, las competencias, la formación y los datos de contacto de Gabriel. Las herramientas internas aparecen dentro de la experiencia con PEM, descritas solo por su función (sin nombres ni datos internos de Telecom).
 
 ## Desarrollo
 
@@ -30,7 +30,7 @@ El repositorio `dekapala/gabriel-portfolio` está conectado a Cloudflare Pages. 
 - Nombre, perfil profesional, ubicación y contacto.
 - Experiencia en Telecom Argentina y sus antecesoras desde mayo de 2014.
 - Colaboración con PEM desde aproximadamente abril de 2026, en paralelo al cargo formal de Analista Técnico de Operaciones Regionales.
-- Aportes de PRISMA, GIPSO, MEL y GuIA integrados dentro de la experiencia laboral.
+- Herramientas internas (seguimiento operativo, planificación de personal, gestión de solicitudes y asistentes de soporte) descritas por su función, sin nombres internos.
 - Competencias y herramientas con indicación del uso de IA y nivel básico de SQL.
 - Formación, formación complementaria e idiomas.
 - Contacto dirigido a oportunidades laborales y acceso al CV en español para imprimir o guardar como PDF.
@@ -41,7 +41,7 @@ La página tiene español e inglés, tema claro y oscuro, navegación responsive
 
 ## Precisión del contenido
 
-El bloque Proyectos describe únicamente la finalidad de PRISMA, GIPSO, MEL y GuIA. No muestra fechas, estados de lanzamiento ni stacks. Las fechas de cargos y formación se conservan. La experiencia laboral explica el desarrollo del frontend y backend de PRISMA y GIPSO con asistencia de IA. En GuIA, Gabriel colaboró con el responsable de crear los agentes en parte de los system prompts y las instrucciones de respuesta.
+Desde 2026-11-14, por confidencialidad con el empleador actual, el sitio no nombra herramientas internas (los tests lo verifican) ni detalla equipamiento de red o procedimientos. El bloque "Herramientas internas" describe solo la función, sin fechas, estados ni stacks. La experiencia dice que las herramientas se construyeron con asistencia de Claude Code y Codex. En los asistentes de soporte, Gabriel colaboró con su responsable de desarrollo en instrucciones y criterios de respuesta. El CV imprimible es el mismo que `~/Documentos/Busqueda-laboral/bin/generar_cv.py` genera en español.
 
 Las competencias describen herramientas y conocimientos reales; se evita atribuir dominio autónomo de programación por la presencia de una tecnología en un desarrollo. No se agregan métricas de ahorro, usuarios o resultados que no estén confirmados. Las fechas individuales de participación en PRISMA requieren precisión y no se inventan. Los estudios universitarios se presentan como estudios cursados y CCNA como formación. No se afirma que las certificaciones vencidas estén vigentes.
 
